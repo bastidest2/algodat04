@@ -37,21 +37,25 @@ public:
     }
   }
 
-  void printTheNodesOrNone() const {
+  bool printTheNodesOrNone() const {
+    bool found = false;
     if((m_iValue % 5) == 0) {
       if(m_pLeft.get() != nullptr) {
+        found = true;
         std::cout << m_pLeft->getValue() << " ";
       }
       if(m_pRight.get() != nullptr) {
+        found = true;
         std::cout << m_pRight->getValue() << " ";
       }
     }
     if(m_pLeft.get() != nullptr){
-      m_pLeft->printTheNodesOrNone();
+      found |= m_pLeft->printTheNodesOrNone();
     }
     if(m_pRight.get() != nullptr){
-      m_pRight->printTheNodesOrNone();
+      found |= m_pRight->printTheNodesOrNone();
     }
+    return found;
   }
 };
 
@@ -83,8 +87,11 @@ int main(int argc, char* argv[]) {
     root.insert(inputs[i]);
   }
 
-  root.printTheNodesOrNone();
-  std::cout << std::endl;
-
+  if(root.printTheNodesOrNone()) {
+    std::cout << std::endl;
+  } else {
+    std::cout << "None" << std::endl;
+  }
+  
   return 0;
 }
