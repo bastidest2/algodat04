@@ -213,6 +213,10 @@ namespace binary_tree {
             }
             return Node<T>::remove(value, m_pRoot);
         }
+
+        bool isEmpty() const {
+            return m_pRoot == nullptr;
+        }
     private:
         std::shared_ptr<Node<T>> m_pRoot;
     };
